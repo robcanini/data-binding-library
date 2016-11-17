@@ -1,10 +1,9 @@
 package it.miriade.corsi.android.databindinglibrary.model.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
-
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,20 +11,33 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import it.miriade.corsi.android.databindinglibrary.AppConst;
-import it.miriade.corsi.android.databindinglibrary.model.dao.UserDao;
 
 /**
  * Created by roberto on 16/11/16 for project DataBindingLibrary
  */
 
-@DatabaseTable(tableName = AppConst.TABLE_USERS, daoClass = UserDao.class)
+@Entity(name = AppConst.TABLE_USERS)
 public class User {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long _id;
+
+    @Column(unique = true)
     private String email;
+
+    @Column
     private String password;
+
+    @Column
     private String firstName;
+
+    @Column
     private String lastName;
+
+    @Column
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
     public User() { }
@@ -38,9 +50,6 @@ public class User {
         this.birthday = birthday;
     }
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return _id;
     }
@@ -49,7 +58,6 @@ public class User {
         this._id = id;
     }
 
-    @Column(unique = true)
     public String getEmail() {
         return email;
     }
@@ -82,7 +90,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Temporal(TemporalType.DATE)
     public Date getBirthday() {
         return birthday;
     }

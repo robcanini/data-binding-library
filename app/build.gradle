@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "it.miriade.corsi.android.databindinglibrary"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -33,5 +33,4 @@ dependencies {
 
     compile "com.j256.ormlite:ormlite-android:5.0"
     compile "javax.persistence:persistence-api:1.0.2"
-    compile "com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1"
 }

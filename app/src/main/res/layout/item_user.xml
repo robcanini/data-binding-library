@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="it.miriade.corsi.android.databindinglibrary.model.entity.User" />
+        <variable name="user" type="User" />
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="90"
+        android:padding="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="0dp"
+            android:layout_weight="40"
+            android:layout_height="wrap_content"
+            android:text="@{user.email}"
+            tools:text="email@esempio.com" />
+
+        <TextView
+            android:id="@+id/user_firstname"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:text="@{user.firstName}"
+            tools:text="Firstname" />
+
+        <TextView
+            android:id="@+id/user_lastname"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:text="@{user.lastName}"
+            tools:text="Lastname" />
+
+    </LinearLayout>
+
+</layout>

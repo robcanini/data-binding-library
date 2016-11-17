@@ -1,26 +1,31 @@
 package it.miriade.corsi.android.databindinglibrary.ui.activity;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 import it.miriade.corsi.android.databindinglibrary.R;
-import it.miriade.corsi.android.databindinglibrary.databinding.MainActivityBinding;
+import it.miriade.corsi.android.databindinglibrary.model.dao.UserDao;
 import it.miriade.corsi.android.databindinglibrary.model.entity.User;
+import it.miriade.corsi.android.databindinglibrary.ui.adapter.UserAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+        setContentView(R.layout.main_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,8 +33,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-        User user = new User("r.canini@miriade.it", "", "Roberto", "Canini", new Date());
-        binding.setUser(user);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        List<User> data = Collections.emptyList();
+        try {
+            data = new UserDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Log.w(getClass().getSimpleName(), data.toString());
+
+        recyclerView.setAdapter(new UserAdapter(data));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

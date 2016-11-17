@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import it.miriade.corsi.android.databindinglibrary.AppConst;
 import it.miriade.corsi.android.databindinglibrary.model.entity.User;
+import it.miriade.corsi.android.databindinglibrary.util.DummyData;
 
 /**
  * Created by roberto on 16/11/16 for project DataBindingLibrary
@@ -33,6 +34,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, User.class);
+            DummyData.createUsers(20);
         } catch (SQLException e) {
             throw new RuntimeException("Non è stato possibile creare una o più tabelle del database");
         }
