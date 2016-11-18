@@ -11,4 +11,9 @@ public interface AppConst {
 
     String TABLE_USERS = "dbl_users";
 
+    String USER_SERIALIZED_ID = "it.miriade.corsi.android.databindinglibrary.USER_SERIALIZED";
+
+    String DATE_FORMAT = "dd/MM/yyyy";
+    String DATE_PATTERN = "%s/%s/%s";
+
 }

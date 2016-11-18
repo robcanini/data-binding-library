@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="it.miriade.corsi.android.databindinglibrary.model.entity.User" />
-        <variable name="user" type="User" />
+
+        <import type="it.miriade.corsi.android.databindinglibrary.dto.UserDto" />
+
+        <variable
+            name="user"
+            type="UserDto" />
     </data>
 
     <LinearLayout

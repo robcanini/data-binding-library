@@ -11,7 +11,7 @@ import java.util.List;
 
 import it.miriade.corsi.android.databindinglibrary.BR;
 import it.miriade.corsi.android.databindinglibrary.R;
-import it.miriade.corsi.android.databindinglibrary.model.entity.User;
+import it.miriade.corsi.android.databindinglibrary.dto.UserDto;
 
 /**
  * Created by roberto on 17/11/16 for project DataBindingLibrary
@@ -19,10 +19,11 @@ import it.miriade.corsi.android.databindinglibrary.model.entity.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
-    private List<User> items;
+    private List<UserDto> items;
+    private UserItemListener listener;
 
-    public UserAdapter(List<User> items) {
-        this.items = items;
+    public interface UserItemListener extends View.OnClickListener {
+        void onItemClick(UserDto user);
     }
 
     public class UserHolder extends RecyclerView.ViewHolder {
@@ -36,6 +37,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     }
 
+    public UserAdapter(List<UserDto> items, UserItemListener listener) {
+        this.items = items;
+        this.listener = listener;
+    }
+
     @Override
     public UserHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -45,9 +51,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     @Override
     public void onBindViewHolder(UserHolder holder, int position) {
-        User user = items.get(position);
+        final UserDto user = items.get(position);
         holder.binding.setVariable(BR.user, user);
         holder.binding.executePendingBindings();
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(user);
+            }
+        });
     }
 
     @Override

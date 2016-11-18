@@ -21,7 +21,7 @@ public class DummyData {
         try {
             UserDao dao = new UserDao();
             for(int i = 0; i < recordNumber; i++) {
-                User dummy = new User("user"+i+"@sample.com", "", "user"+i,"dummy"+i, new Date());
+                User dummy = new User("user" + i + "@sample.com", "user" + i, "dummy" + i, new Date(), "");
                 dao.create(dummy);
             }
         } catch (SQLException e) {

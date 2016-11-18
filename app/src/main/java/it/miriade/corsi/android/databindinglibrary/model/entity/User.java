@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import it.miriade.corsi.android.databindinglibrary.AppConst;
+import it.miriade.corsi.android.databindinglibrary.dto.UserDto;
 
 /**
  * Created by roberto on 16/11/16 for project DataBindingLibrary
@@ -28,9 +29,6 @@ public class User {
     private String email;
 
     @Column
-    private String password;
-
-    @Column
     private String firstName;
 
     @Column
@@ -40,14 +38,25 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
+    @Column
+    private String color;
+
     public User() { }
 
-    public User(String email, String password, String firstName, String lastName, Date birthday) {
+    public User(String email, String firstName, String lastName, Date birthday, String color) {
         this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        this.color = color;
+    }
+
+    public User(UserDto dto) {
+        this.email = dto.email.get();
+        this.firstName = dto.firstName.get();
+        this.lastName = dto.lastName.get();
+        this.birthday = dto.birthday.get();
+        this.color = dto.color.get();
     }
 
     public Long getId() {
@@ -64,14 +73,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -98,14 +99,23 @@ public class User {
         this.birthday = birthday;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                "_id=" + _id +
+                ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthday=" + birthday +
+                ", color='" + color + '\'' +
                 '}';
     }
 
