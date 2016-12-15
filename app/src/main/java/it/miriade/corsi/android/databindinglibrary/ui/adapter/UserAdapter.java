@@ -20,10 +20,11 @@ import it.miriade.corsi.android.databindinglibrary.dto.UserDto;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     private List<UserDto> items;
-    private UserItemListener listener;
+    private UserItemListener clickListener;
 
-    public interface UserItemListener extends View.OnClickListener {
+    public interface UserItemListener {
         void onItemClick(UserDto user);
+        void onItemLongClick(UserDto user);
     }
 
     public class UserHolder extends RecyclerView.ViewHolder {
@@ -37,9 +38,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     }
 
-    public UserAdapter(List<UserDto> items, UserItemListener listener) {
+    public UserAdapter(List<UserDto> items, UserItemListener clickListener) {
         this.items = items;
-        this.listener = listener;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -53,13 +54,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     public void onBindViewHolder(UserHolder holder, int position) {
         final UserDto user = items.get(position);
         holder.binding.setVariable(BR.user, user);
-        holder.binding.executePendingBindings();
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClick(user);
+                clickListener.onItemClick(user);
             }
         });
+        holder.binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                clickListener.onItemLongClick(user);
+                return true;
+            }
+        });
+        holder.binding.executePendingBindings();
     }
 
     @Override

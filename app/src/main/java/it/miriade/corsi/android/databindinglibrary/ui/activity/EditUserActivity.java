@@ -108,6 +108,7 @@ public class EditUserActivity extends AppCompatActivity implements EditUserView 
             }
             entity.setColor(this.user.color.get());
             dao.update(entity);
+
             EditUserActivity.this.finish();
         } catch (SQLException e) {
             e.printStackTrace();

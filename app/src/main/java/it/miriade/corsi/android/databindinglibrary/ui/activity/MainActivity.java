@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(UserDto user) {
+        user.firstName.set("Mario");
+        user.lastName.set("Rossi");
+    }
+
+    @Override
+    public void onItemLongClick(UserDto user) {
         Intent detailIntent = new Intent(this, DetailActivity.class);
         detailIntent.putExtra(AppConst.USER_SERIALIZED_ID, user);
         startActivity(detailIntent);
